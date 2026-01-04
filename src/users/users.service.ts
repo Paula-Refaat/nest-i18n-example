@@ -18,7 +18,12 @@ export class UserService {
 
   async findUsers(): Promise<User[]> {
     const users = await this.userModel.find();
-    return users;
+    const localizedUser =
+      await this.userModel.schema.methods.toJSONLocalizedOnly(
+        users,
+        I18nContext.current().lang,
+      );
+    return localizedUser;
   }
 
   async findUserById(id: MongoIdDto): Promise<User> {
@@ -28,7 +33,12 @@ export class UserService {
         this.i18n.translate('test.NOT_FOUND', { args: { id } }),
       );
     }
-    return user;
+    const localizedUser =
+      await this.userModel.schema.methods.toJSONLocalizedOnly(
+        user,
+        I18nContext.current().lang,
+      );
+    return localizedUser;
   }
 
   async createUser(createUserDto: CreateUserDto): Promise<User> {
