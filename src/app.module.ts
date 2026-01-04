@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongoModule } from './mongo/mongo.module';
 import {
   AcceptLanguageResolver,
+  CookieResolver,
   HeaderResolver,
   I18nModule,
   QueryResolver,
@@ -24,6 +25,7 @@ import * as path from 'path';
         { use: QueryResolver, options: ['lang'] },
         AcceptLanguageResolver,
         new HeaderResolver(['x-lang']),
+        new CookieResolver,
       ],
     }),
     UsersModule,
