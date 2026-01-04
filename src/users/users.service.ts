@@ -37,7 +37,7 @@ export class UserService {
       await this.userModel.schema.methods.toJSONLocalizedOnly(
         user,
         I18nContext.current().lang,
-      );
+      ); 
     return localizedUser;
   }
 
